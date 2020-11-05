@@ -73,20 +73,21 @@ const loadSong = (song)=>{
 }
 
 nextBtn.addEventListener("click",()=>{
-    if(songIndex < songs.length-1){
-        console.log(songIndex);
-        songIndex++;
-        loadSong(songs[songIndex]);
-        playSong();
+    songIndex++;
+    if(songIndex > songs.length-1){
+        songIndex = 0;    
     }
+    loadSong(songs[songIndex]);
+    playSong();
 });
 
 prevBtn.addEventListener("click",()=>{
-    if(songIndex > 0 ){
-        console.log(songIndex);
-        songIndex--;
-        loadSong(songs[songIndex]);
-        playSong();
+    songIndex--;
+    if(songIndex < 0){
+        songIndex = songs.length-1;    
     }
+    loadSong(songs[songIndex]);
+    playSong();
+    
 });
  
