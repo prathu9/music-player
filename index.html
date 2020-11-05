@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="icon" type="image/png" href="https://www.google.com/s2/u/0/favicons?domain=prathu9.design">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="player-container">
+        <div class="img-container">
+            <img src="images/Alan-Walker.jpg" alt="Faded|Alan Walker">
+        </div>
+        <h2 id="title">Faded</h2>
+        <h3 id="artist">Alan Walker</h3>
+        <audio src="music/Alan Walker-Faded.mp3"></audio>
+        <!-- Progress Bar -->
+        <div class="progress-bar-container" id="progress-bar-container">
+            <div class="progress-bar"></div>
+            <div class="duration-wrapper">
+                <div class="current-time">0:00</div>
+                <div class="duration">4:00</div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <div class="player-controls">
+            <i class="fas fa-backward" id="prev" title="previous"></i>
+            <i class="fas fa-play" id="play" title="play"></i>
+            <i class="fas fa-forward" id="next" title="next"></i>
+        </div>
+    </div>
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
