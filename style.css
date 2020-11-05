@@ -112,7 +112,7 @@ h3{
 @media screen and (max-width:375px){
     .player-container{
         width:95vw;
-        height:450px;
+        height:500px;
     }
 
     .img-container{
