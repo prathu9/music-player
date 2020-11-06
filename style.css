@@ -2,11 +2,12 @@
 
 html{
     box-sizing: border-box;
+    height:100%;
 }
 
 body{
     margin:0;
-    min-height:100vh;
+    min-height:100%;
     color:#fff;
     background-color:#555;
     font-family: spartan, "sans-serif";
@@ -18,7 +19,7 @@ body{
 /* Player container */
 .player-container{ 
     width:400px;
-    height:520px;
+    height:500px;
     background-color:rgb(7, 7, 14);
     border-radius:30px;
     box-shadow: 0 10px 30px 5px rgba(0,0,0,0.3);
@@ -27,7 +28,7 @@ body{
 /* Song image container */
 .img-container{
     position:relative;
-    top:-50px;
+    top:-30px;
     width:300px;
     height:300px;
     margin:0 auto;
@@ -125,8 +126,9 @@ h3{
 /* Media Query: Mobile */
 @media screen and (max-width:350px){
     .player-container{
+        margin-top:40px;
         width:95vw;
-        height:480px;
+        height:85vh;
     }
 
     .img-container{
@@ -153,7 +155,17 @@ h3{
 
 /* Media query: Galaxy fold */
 @media screen and (max-width:280px){
+    /* progress bar */
+    .duration-wrapper{
+        margin-top:30px;
+    }
+
     /* Controls */
+    .button-container{
+        padding-left:15px;
+        margin-top:30px;
+    }
+
     .player-controls .fas{
         margin-right:20px;
     }
