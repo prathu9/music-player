@@ -15,26 +15,22 @@ body{
     align-items:center;
 }
 
+/* Player container */
 .player-container{ 
-    position: relative;
     width:400px;
-    height:500px;
+    height:520px;
     background-color:rgb(7, 7, 14);
     border-radius:30px;
     box-shadow: 0 10px 30px 5px rgba(0,0,0,0.3);
 }
 
+/* Song image container */
 .img-container{
     position:relative;
     top:-50px;
-    left:50px;
     width:300px;
     height:300px;
-    margin:0;
-    /* transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%); */
+    margin:0 auto;
 }
 
 .img-container img{
@@ -45,9 +41,20 @@ body{
     box-shadow: 0 5px 30px 5px rgba(255,255,255,0.5);
 }
 
+/* Control Section */
+.control-container{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    flex-direction:column;
+    width:100%;
+    min-height:200px;
+}
+
+/* Title and Artist */
 h2, 
 h3{
-    margin:0 0 10px 0;
+    margin:0 0 15px 0;
     text-align: center;
 }
 
@@ -56,47 +63,52 @@ h3{
     font-weight:400;
 }
 
+/* Progress Bar */
 .progress-container{
-    position:absolute;
-    bottom:20%;
-    left:10%;
     width:80%;
-    height:5px;
+    height:8px;
     background-color: cornsilk;
+    border-radius:10px;
     cursor:pointer;
 }
 
+.progress-container:hover{
+    box-shadow:0 0 5px 2px rgba(255,255,255,0.8)
+}
+
 .progress{
-    position:relative;
-    left:0;
     width:0%;
-    height:5px;
+    height:100%;
     background-color: blue;
+    border-radius:10px;
+}
+
+.duration-wrapper{
+    display:flex;
+    justify-content:space-between;
+    width:80%;
 }
 
 .current-time,
 .duration{
-    position: absolute;
-    top:-30px;
     margin:5px;
     font-size:12px;
+    user-select: none;
 }
 
-.current-time{
-    left:0;
-}
-
-.duration{
-    right:0;
-}
 
 /* Controls */
 .player-controls{
-    position:relative;
-    top:50px;
-    left:120px;
-    width:200px;
+    display:flex;
+    justify-content: center;
+    width:80%;
+    margin-top:30px;
     user-select:none;
+}
+
+.button-container{
+    margin:0 auto;
+    padding-left:30px;
 }
 
 .player-controls .fas{
@@ -109,7 +121,9 @@ h3{
     filter:brightness(80%);
 }
 
-@media screen and (max-width:375px){
+
+/* Media Query: Mobile */
+@media screen and (max-width:350px){
     .player-container{
         width:95vw;
         height:480px;
@@ -120,6 +134,12 @@ h3{
         height:260px;
     }
 
+    .img-container{
+        width:230px;
+        height:230px;
+    }
+
+    /* Title and Artist */
     h2{
         font-size:20px;
     }
@@ -128,27 +148,13 @@ h3{
         font-size:15px;
     }
 
-    .progress-container{
-        bottom:20%;
-    }
-
-    /* Controls */
-    .player-controls{
-        top:85px;
-        left:95px;
-    }
+    
 }
 
-@media screen and (max-width:350px){
-    .img-container{
-        width:230px;
-        height:230px;
-        left:40px;
-    }
-
+/* Media query: Galaxy fold */
+@media screen and (max-width:280px){
     /* Controls */
-    .player-controls{
-        top:80px;
-        left:75px;
+    .player-controls .fas{
+        margin-right:20px;
     }
 }
