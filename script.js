@@ -2,6 +2,10 @@ const image = document.querySelector("img");
 const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 const music = document.querySelector("audio");
+const progressContainer = document.getElementById("progress-container");
+const progress = document.getElementById("progress");
+const currentTimeEl = document.getElementById("current-time");
+const durationEl = document.getElementById("duration");
 const prevBtn = document.getElementById("prev");
 const playBtn = document.getElementById("play");
 const nextBtn = document.getElementById("next");
@@ -64,7 +68,6 @@ playBtn.addEventListener("click", ()=>(isPlaying?pauseSong():playSong()));
 
 //loading song
 const loadSong = (song)=>{
-    console.log(song);
     title.textContent = song.displayName;
     artist.textContent = song.artist;
     image.src = song.poster;
@@ -72,14 +75,59 @@ const loadSong = (song)=>{
     image.style.boxShadow = song.theme;
 }
 
-nextBtn.addEventListener("click",()=>{
+
+//Update progress bar
+const updateProgress = (e)=>{
+    // if(isPlaying){
+        const {duration, currentTime} = e.srcElement;
+
+        //update progress bar width
+        const progressPercent = (currentTime/duration)*100;
+        progress.style.width = `${progressPercent}%`;
+
+        //update duration display
+        const timeDisplayFormat = (time)=>{
+            time = time < 10?
+                    `0${time}`:
+                    `${time}`;
+            return time;
+        }
+        const durationMinutes = Math.floor(duration/60);
+        const durationSeconds = Math.floor(duration%60);
+
+        //Delay switching duration element to avoid NaN
+        if(durationSeconds){
+            durationEl.textContent = `${durationMinutes}:
+                                 ${timeDisplayFormat(durationSeconds)}`;
+        }
+
+        //update current time display
+        let currentMinutes = Math.floor(currentTime/60);
+        let currentSeconds = Math.floor(currentTime%60);
+        currentTimeEl.textContent = `${currentMinutes}:
+                                    ${timeDisplayFormat(currentSeconds)}`;
+    // }
+}
+
+//Set progress on click
+const setProgress = function(e){
+    let width = this.clientWidth;
+    let clickX = e.offsetX;
+    const {duration} = music;
+    music.currentTime = (clickX / width) * duration;
+}
+
+const nextSong = ()=>{
     songIndex++;
     if(songIndex > songs.length-1){
         songIndex = 0;    
     }
     loadSong(songs[songIndex]);
     playSong();
-});
+}
+
+//Event Listener
+nextBtn.addEventListener("click", nextSong);
 
 prevBtn.addEventListener("click",()=>{
     songIndex--;
@@ -91,3 +139,7 @@ prevBtn.addEventListener("click",()=>{
     
 });
  
+music.addEventListener("ended", nextSong);
+music.addEventListener("timeupdate", updateProgress);
+
+progressContainer.addEventListener("click", setProgress);
