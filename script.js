@@ -111,16 +111,17 @@ const updateProgress = (e)=>{
 
 //change Progress
 const changeProgress = (event, target)=>{
-    let rect = event.currentTarget.getBoundingClientRect();
+    let rect = target.getBoundingClientRect();
     let clickX = event.clientX - rect.left;
     let width = target.clientWidth;
     const {duration} = music;
+    console.log(clickX, width, duration, event.clientX);
     music.currentTime = (clickX / width) * duration;
 }
 
 //Set progress on click
 const setProgress = function(e){
-    changeProgress(e, this);
+    changeProgress(e, progressContainer);
     isMouseDown = true;
 }
 
@@ -128,7 +129,7 @@ const setProgress = function(e){
 //Set progress by dragging progress bar
 const setProgressOnDrag = function(e){
     if(isMouseDown){
-        changeProgress(e, this);
+        changeProgress(e, progressContainer);
     }
 }
 
