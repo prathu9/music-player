@@ -176,11 +176,18 @@ music.addEventListener("timeupdate", updateProgress);
 progressContainer.addEventListener("mousedown", setProgress);
 
 //for touch screen
-progressCurrPos.addEventListener("touchstart", (e)=>{
+progressContainer.addEventListener("touchstart", (e)=>{
     if(e.cancelable){
         e.preventDefault();
         setProgress(e);
     }
+})
+
+progressContainer.addEventListener("touchend",(e)=>{
+   if(e.cancelable){
+        e.preventDefault();
+        isMouseDown = false;
+   }
 })
 
 document.body.addEventListener("touchmove", setProgressOnDrag);
