@@ -78,9 +78,20 @@ h3{
 }
 
 .progress{
+    position:relative;
     width:0%;
     height:100%;
     background-color: blue;
+    border-radius:10px;
+}
+
+.progress-curr-pos{
+    position:absolute;
+    top:-1px;
+    right:-5px;
+    width:10px;
+    height:10px;
+    background-color:blue;
     border-radius:10px;
 }
 

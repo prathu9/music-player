@@ -9,8 +9,10 @@ const durationEl = document.getElementById("duration");
 const prevBtn = document.getElementById("prev");
 const playBtn = document.getElementById("play");
 const nextBtn = document.getElementById("next");
+const progressCurrPos = document.querySelector(".progress-curr-pos");
 let isPlaying = false; //Check if playing
 let songIndex = 0;
+let isMouseDown = false;
 
 //Songs
 const songs = [
@@ -78,8 +80,7 @@ const loadSong = (song)=>{
 
 //Update progress bar
 const updateProgress = (e)=>{
-    // if(isPlaying){
-        const {duration, currentTime} = e.srcElement;
+        const {duration, currentTime} = e.target;
 
         //update progress bar width
         const progressPercent = (currentTime/duration)*100;
@@ -106,15 +107,29 @@ const updateProgress = (e)=>{
         let currentSeconds = Math.floor(currentTime%60);
         currentTimeEl.textContent = `${currentMinutes}:
                                     ${timeDisplayFormat(currentSeconds)}`;
-    // }
+}
+
+//change Progress
+const changeProgress = (event, target)=>{
+    let rect = event.currentTarget.getBoundingClientRect();
+    let clickX = event.clientX - rect.left;
+    let width = target.clientWidth;
+    const {duration} = music;
+    music.currentTime = (clickX / width) * duration;
 }
 
 //Set progress on click
 const setProgress = function(e){
-    let width = this.clientWidth;
-    let clickX = e.offsetX;
-    const {duration} = music;
-    music.currentTime = (clickX / width) * duration;
+    changeProgress(e, this);
+    isMouseDown = true;
+}
+
+
+//Set progress by dragging progress bar
+const setProgressOnDrag = function(e){
+    if(isMouseDown){
+        changeProgress(e, this);
+    }
 }
 
 const nextSong = ()=>{
@@ -138,8 +153,22 @@ prevBtn.addEventListener("click",()=>{
     playSong();
     
 });
+
+//Set isMouseDown when end of progress bar is clicked
+progressCurrPos.addEventListener("mousedown", (e)=>{
+    e.preventDefault();
+    isMouseDown = true;
+})
+
+document.body.addEventListener("mouseup", (e)=>{
+    e.preventDefault();
+    isMouseDown = false;
+});
+
+//change progress by dragging progress bar
+document.body.addEventListener("mousemove", setProgressOnDrag);
  
 music.addEventListener("ended", nextSong);
 music.addEventListener("timeupdate", updateProgress);
 
-progressContainer.addEventListener("click", setProgress);
+progressContainer.addEventListener("mousedown", setProgress);
