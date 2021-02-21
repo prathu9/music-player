@@ -112,10 +112,11 @@ const updateProgress = (e)=>{
 //change Progress
 const changeProgress = (event, target)=>{
     let rect = target.getBoundingClientRect();
-    let clickX = event.clientX - rect.left;
+    var clientX = /touch/.test(event.type) ? event.touches[0].clientX : event.clientX;
+    let clickX = clientX - rect.left;
     let width = target.clientWidth;
     const {duration} = music;
-    console.log(clickX, width, duration, event.clientX);
+    console.log(clickX, width, duration, event.clientX, event);
     music.currentTime = (clickX / width) * duration;
 }
 
@@ -173,3 +174,13 @@ music.addEventListener("ended", nextSong);
 music.addEventListener("timeupdate", updateProgress);
 
 progressContainer.addEventListener("mousedown", setProgress);
+
+//for touch screen
+progressCurrPos.addEventListener("touchstart", (e)=>{
+    if(e.cancelable){
+        e.preventDefault();
+        setProgress(e);
+    }
+})
+
+document.body.addEventListener("touchmove", setProgressOnDrag);
