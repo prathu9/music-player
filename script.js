@@ -116,7 +116,6 @@ const changeProgress = (event, target)=>{
     let clickX = clientX - rect.left;
     let width = target.clientWidth;
     const {duration} = music;
-    console.log(clickX, width, duration, event.clientX, event);
     music.currentTime = (clickX / width) * duration;
 }
 
