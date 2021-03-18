@@ -57,10 +57,15 @@ const playSong = ()=>{
 
 //Pause
 const pauseSong = ()=>{
-    isPlaying = false;
-    playBtn.classList.replace("fa-pause","fa-play");
-    playBtn.setAttribute("title", "play");
-    music.pause();
+    try{
+        isPlaying = false;
+        playBtn.classList.replace("fa-pause","fa-play");
+        playBtn.setAttribute("title", "play");
+        music.pause();
+    }
+    catch(e){
+        console.log("Error in pause function", e);
+    }
 }
 
 //Play or Pause Event Listener
