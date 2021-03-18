@@ -22,9 +22,9 @@ const changeVol = (e)=>{
 		    x = center.x - clientX;
 		    y = center.y - clientY;
 		    angle = (180/(Math.PI)) * Math.atan2(y, x);
-		    volumeRange.style.transform = `rotate(${angle}deg)`;
+		    console.log(Math.abs(angle));
+		    volumeRange.style.transform = `rotate(${Math.abs(angle)}deg)`;
 		    music.volume = (angle/18)/10;
-		    console.log(music.volume);
 		}
 	}
 	catch(error){
@@ -73,9 +73,12 @@ volumeContainer.addEventListener("touchmove", (e)=>{
 
 volumeContainer.addEventListener("touchend",(e)=>{
    if(e.cancelable){
-        e.preventDefault();
         isMouseDownOnVolume = false;
    }
+})
+
+volumeCover.addEventListener("touchstart", (e)=>{
+	e.stopPropagation();
 })
 
 document.body.addEventListener("touchenter", (e)=>{
