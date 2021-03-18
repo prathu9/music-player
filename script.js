@@ -57,15 +57,10 @@ const playSong = ()=>{
 
 //Pause
 const pauseSong = ()=>{
-    try{
-        isPlaying = false;
-        playBtn.classList.replace("fa-pause","fa-play");
-        playBtn.setAttribute("title", "play");
-        music.pause();
-    }
-    catch(e){
-        console.log("Error in pause function", e);
-    }
+    isPlaying = false;
+    playBtn.classList.replace("fa-pause","fa-play");
+    playBtn.setAttribute("title", "play");
+    music.pause();
 }
 
 //Play or Pause Event Listener
@@ -138,7 +133,8 @@ const setProgressOnDrag = function(e){
     }
 }
 
-const nextSong = ()=>{
+const nextSong = (e)=>{
+    e.preventDefault();
     songIndex++;
     if(songIndex > songs.length-1){
         songIndex = 0;    
