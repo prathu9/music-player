@@ -13,6 +13,7 @@ const progressCurrPos = document.querySelector(".progress-curr-pos");
 let isPlaying = false; //Check if playing
 let songIndex = 0;
 let isMouseDown = false;
+let playPromise = "";
 
 //Songs
 const songs = [
@@ -49,18 +50,27 @@ const songs = [
 
 //Pause
 const playSong = ()=>{
-    isPlaying = true;
-    playBtn.classList.replace("fa-play","fa-pause");
-    playBtn.setAttribute("title", "pause");
-    music.play();
+	playPromise = music.play();
+	if (playPromise !== undefined) {
+	    playPromise.then(_ => {
+	      isPlaying = true;
+    	  playBtn.classList.replace("fa-play","fa-pause");
+    	  playBtn.setAttribute("title", "pause");
+	    })
+	    .catch(error => {
+	     console.log(playPromise);
+	    });
+  	}
 }
 
 //Pause
 const pauseSong = ()=>{
-    isPlaying = false;
-    playBtn.classList.replace("fa-pause","fa-play");
-    playBtn.setAttribute("title", "play");
-    music.pause();
+	if(isPlaying){
+		isPlaying = false;
+    	playBtn.classList.replace("fa-pause","fa-play");
+    	playBtn.setAttribute("title", "play");
+    	music.pause();
+	} 
 }
 
 //Play or Pause Event Listener
